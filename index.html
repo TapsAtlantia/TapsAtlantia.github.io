@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Quantum Apps</title>
-<meta name="description" content="Free, open-source Android apps that put the sites you already use behind one ad-blocked front door. Written by AI, source public.">
+<meta name="description" content="Free, open-source Android apps that stay out of your way — ad-blocked site readers and offline writing tools. Written by AI, source public.">
 <meta name="theme-color" content="#0b0e14">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/mtg/icon.png">
 <meta property="og:title" content="Quantum Apps">
-<meta property="og:description" content="Free, open-source Android apps that put the sites you already use behind one ad-blocked front door.">
+<meta property="og:description" content="Free, open-source Android apps that stay out of your way — ad-blocked site readers and offline writing tools.">
 <meta property="og:type" content="website">
 <style>
 :root {
@@ -189,8 +189,9 @@ footer .links { margin: 12px 0; display: flex; gap: 16px; justify-content: cente
   <header>
     <h1><span class="q">QUANTUM</span> <span class="a">APPS</span></h1>
     <p class="tagline">
-      Free, open-source Android apps. Each one puts a handful of sites you already use
-      behind a single front door, and blocks the ads, popups and redirects on the way.
+      Free, open-source Android apps that stay out of your way. Some put the sites you
+      already use behind one front door and block the ads on the way; others are tools that
+      work with no network at all.
     </p>
 
     <div class="ai">
@@ -205,8 +206,46 @@ footer .links { margin: 12px 0; display: flex; gap: 16px; justify-content: cente
 
   <section id="apps">
     <h2>THE APPS</h2>
-    <p class="sub">Android 7.0 or newer. Installed by downloading the APK, not through the Play Store.</p>
+    <p class="sub">Android 7.0 or newer, except Quantum Ink which needs 8.0. Installed by downloading the APK, not through the Play Store.</p>
     <div class="grid" id="cards"></div>
+  </section>
+
+  <!-- ============ QUANTUM INK ============ -->
+  <section class="app" id="ink">
+    <div class="head">
+      <img class="px" src="assets/ink/icon.png" alt="Quantum Ink icon">
+      <div>
+        <h2 style="margin:0">QUANTUM INK</h2>
+        <span class="kind" style="color:var(--blue);font-size:11px;letter-spacing:2px">WRITING</span>
+      </div>
+    </div>
+
+    <ul class="feat">
+      <li><b>Opens where you left off.</b> <span>Last chapter, last cursor position, keyboard already up. No dashboard, no splash — zero taps between opening the app and writing the next word.</span></li>
+      <li><b>Saves constantly, without a timer.</b> <span>Your text is written to local storage about half a second after you stop typing, on every app switch, and every 20 seconds during a sprint. Force-stopping the app mid-sentence loses nothing.</span></li>
+      <li><b>A story bible that does not interrupt you.</b> <span>Select a name, tap once, and the entry appears in a sheet over the page. Entries answer to aliases, so "the Ashbound King" finds Kaelen. Your cursor never moves.</span></li>
+      <li><b>Catches a name drifting.</b> <span>Find every use of a term across the manuscript, and every spelling one letter away from it — the thing that catches "Kaellen" on page two hundred.</span></li>
+      <li><b>Writing sprints.</b> <span>10 to 45 minutes, with live words per minute and an estimate of when the chapter finishes at your current pace. Every sprint ends with a restore point.</span></li>
+      <li><b>Loose threads and quick jots.</b> <span>Track promises the story has not yet kept, and capture a stray thought in one line without leaving the canvas.</span></li>
+      <li><b>A time machine.</b> <span>Restore points after every sprint and whenever you ask. Restoring is itself undoable, because the current text is saved first.</span></li>
+      <li><b>Typewriter mode.</b> <span>Keeps the line you are writing in the middle of the screen, so your eyes never track down toward the keyboard.</span></li>
+      <li><b>Export anywhere.</b> <span>Markdown or plain text, one chapter or the whole manuscript, through Android's file picker.</span></li>
+      <li><b>Streaks only if you want them.</b> <span>Daily goal, streak and freezes all live in a drawer, never on the page. Every feature in the app can be switched off, and when it is off it is not drawn at all.</span></li>
+      <li><b>Nothing leaves the device.</b> <span>There is no internet permission in the app at all — it cannot phone home because it cannot reach the network.</span></li>
+    </ul>
+
+    <div class="strip">
+      <figure><img src="assets/ink/shot_editor.png" alt="The writing canvas"><figcaption>THE PAGE</figcaption></figure>
+      <figure><img src="assets/ink/shot_app.png" alt="Sprints, goals and themes"><figcaption>SPRINTS</figcaption></figure>
+      <figure><img src="assets/ink/shot_book.png" alt="Chapters, lore and threads"><figcaption>THE BOOK</figcaption></figure>
+    </div>
+
+    <p class="note">
+      <b>One honest note.</b> The sprint lock asks Android to pin the screen rather than
+      pretending to be a kiosk — no ordinary app can block task switching, and anything claiming
+      otherwise is lying to you. It is friction that makes leaving deliberate. Your words are
+      saved either way.
+    </p>
   </section>
 
   <!-- ============ QUANTUM MTG ============ -->
@@ -290,6 +329,7 @@ footer .links { margin: 12px 0; display: flex; gap: 16px; justify-content: cente
   <footer>
     <div>Written by AI (Claude Code). Source public, nothing collected.</div>
     <div class="links">
+      <a href="https://github.com/TapsAtlantia/QuantumInk">Quantum Ink source</a>
       <a href="https://github.com/TapsAtlantia/QuantumMTG">Quantum MTG source</a>
       <a href="https://github.com/TapsAtlantia/QuantumManga">QuantumManga source</a>
       <a href="https://github.com/TapsAtlantia">GitHub</a>
@@ -303,6 +343,16 @@ footer .links { margin: 12px 0; display: flex; gap: 16px; justify-content: cente
 // ---- every app on the site, in one place. Add an object, get a card. ----
 var USER = "TapsAtlantia";
 var APPS = [
+  {
+    id: "ink",
+    name: "Quantum Ink",
+    kind: "WRITING",
+    repo: "QuantumInk",
+    apk: "QuantumInk.apk",
+    icon: "assets/ink/icon.png",
+    minAndroid: "Android 8.0+",
+    blurb: "An offline writing app for novelists, with a story bible one tap from the page."
+  },
   {
     id: "mtg",
     name: "Quantum MTG",
@@ -348,13 +398,14 @@ var APPS = [
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rel) {
         var el = document.getElementById("meta-" + app.id);
-        if (!rel) { el.textContent = "Android 7.0+ · free"; return; }
+        if (!rel) { el.textContent = (app.minAndroid || "Android 7.0+") + " · free"; return; }
         var asset = (rel.assets || []).filter(function (a) { return /\.apk$/i.test(a.name); })[0];
         var mb = asset ? (asset.size / 1048576).toFixed(1) + " MB · " : "";
-        el.textContent = (rel.tag_name || "") + " · " + mb + "Android 7.0+ · free";
+        el.textContent = (rel.tag_name || "") + " · " + mb + (app.minAndroid || "Android 7.0+") + " · free";
       })
       .catch(function () {
-        document.getElementById("meta-" + app.id).textContent = "Android 7.0+ · free";
+        document.getElementById("meta-" + app.id).textContent =
+          (app.minAndroid || "Android 7.0+") + " · free";
       });
   });
 
