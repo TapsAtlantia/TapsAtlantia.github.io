@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quantum Apps</title>
+<meta name="description" content="Free, open-source Android apps that put the sites you already use behind one ad-blocked front door. Written by AI, source public.">
+<meta name="theme-color" content="#0b0e14">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/mtg/icon.png">
+<meta property="og:title" content="Quantum Apps">
+<meta property="og:description" content="Free, open-source Android apps that put the sites you already use behind one ad-blocked front door.">
+<meta property="og:type" content="website">
+<style>
+:root {
+  --ink: #0b0e14;
+  --panel: #141a26;
+  --panel-2: #1b2232;
+  --line: #2a3346;
+  --text: #e8eef7;
+  --dim: #97a3b6;
+  --gold: #d9b14a;
+  --blue: #4fa8de;
+  --green: #3fb950;
+  --green-dk: #1f6f33;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: ui-monospace, "Cascadia Mono", "Courier New", monospace;
+  background: var(--ink);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+.px { image-rendering: pixelated; image-rendering: crisp-edges; }
+a { color: var(--blue); }
+
+/* ---------- starfield ---------- */
+#sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+#sky div {
+  position: absolute; inset: -20% 0;
+  background-repeat: repeat;
+  will-change: transform;
+}
+#sky .far  { background-image: url("assets/manga/stars_far.png");  background-size: 320px; opacity: .55; }
+#sky .near { background-image: url("assets/manga/stars_near.png"); background-size: 400px; opacity: .45; }
+
+.wrap { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 18px; }
+
+/* ---------- hero ---------- */
+header { padding: 56px 0 30px; text-align: center; }
+h1 {
+  font-size: clamp(30px, 9vw, 62px);
+  letter-spacing: 4px;
+  line-height: 1.05;
+  text-shadow: 3px 3px 0 #000, 0 0 26px rgba(79,168,222,.35);
+}
+h1 .q { color: var(--blue); }
+h1 .a { color: var(--gold); }
+.tagline {
+  margin: 16px auto 0;
+  max-width: 620px;
+  color: var(--dim);
+  font-size: clamp(13px, 3.4vw, 16px);
+}
+
+/* ---------- AI notice ---------- */
+.ai {
+  margin: 26px auto 0;
+  max-width: 680px;
+  text-align: left;
+  background: linear-gradient(180deg, #1d1708, #171206);
+  border: 2px solid #6b5420;
+  border-left: 6px solid var(--gold);
+  padding: 14px 16px;
+  font-size: 13px;
+}
+.ai b { color: var(--gold); letter-spacing: 1px; }
+.ai p { margin-top: 6px; color: #e4d9bd; }
+
+/* ---------- app cards ---------- */
+h2 {
+  font-size: clamp(18px, 5vw, 26px);
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: 6px;
+}
+.sub { color: var(--dim); font-size: 13px; margin-bottom: 22px; }
+section { padding: 40px 0; }
+
+.grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+
+.card {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 2px solid var(--line);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card .top { display: flex; gap: 14px; align-items: center; }
+.card img.icon { width: 68px; height: 68px; border: 2px solid var(--line); flex: none; }
+.card h3 { font-size: 19px; letter-spacing: 1px; }
+.card .kind { color: var(--gold); font-size: 11px; letter-spacing: 2px; }
+.card p.blurb { color: var(--dim); font-size: 13px; min-height: 42px; }
+.card .meta { color: #6f7b8d; font-size: 11px; }
+
+.btn {
+  display: block; text-align: center; text-decoration: none;
+  background: linear-gradient(180deg, var(--green), var(--green-dk));
+  color: #04120a; font-weight: bold; letter-spacing: 2px;
+  padding: 13px 10px; border: 2px solid #0d8a2c;
+  box-shadow: 0 4px 0 #0a3d18;
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #0a3d18; }
+.btn.ghost {
+  background: transparent; color: var(--text);
+  border-color: var(--line); box-shadow: none; font-weight: normal;
+}
+.row2 { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+
+/* ---------- app detail ---------- */
+.app { border-top: 2px solid var(--line); }
+.app .head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.app .head img { width: 52px; height: 52px; border: 2px solid var(--line); }
+.app .head h2 { margin: 0; }
+
+ul.feat { list-style: none; display: grid; gap: 10px; }
+ul.feat li {
+  background: rgba(20,26,38,.75);
+  border-left: 3px solid var(--blue);
+  padding: 10px 14px;
+  font-size: 13.5px;
+}
+ul.feat li b { color: var(--text); }
+ul.feat li span { color: var(--dim); }
+.app.gold ul.feat li { border-left-color: var(--gold); }
+
+.strip {
+  display: flex; gap: 8px; overflow-x: auto; margin-top: 18px;
+  padding-bottom: 8px; scrollbar-width: thin;
+}
+.strip figure { flex: none; width: 104px; }
+.strip img { width: 104px; height: 200px; object-fit: cover; object-position: top; border: 2px solid var(--line); }
+.strip figcaption { font-size: 10px; color: #6f7b8d; margin-top: 5px; text-align: center; letter-spacing: 1px; }
+
+.note { color: var(--dim); font-size: 12.5px; margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 12px; }
+.note b { color: #c9b27a; }
+
+/* ---------- install ---------- */
+ol.steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+ol.steps li {
+  counter-increment: s;
+  display: flex; gap: 14px; align-items: flex-start;
+  background: rgba(20,26,38,.75); border: 1px solid var(--line); padding: 12px 14px;
+  font-size: 13.5px;
+}
+ol.steps li::before {
+  content: counter(s);
+  flex: none; width: 26px; height: 26px; line-height: 24px; text-align: center;
+  border: 2px solid var(--gold); color: var(--gold); font-weight: bold;
+}
+
+/* ---------- footer ---------- */
+footer {
+  border-top: 2px solid var(--line); margin-top: 30px;
+  padding: 26px 0 40px; text-align: center; font-size: 12px; color: var(--dim);
+}
+footer .links { margin: 12px 0; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s, transform .5s; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div id="sky" aria-hidden="true"><div class="far"></div><div class="near"></div></div>
+
+<div class="wrap">
+
+  <header>
+    <h1><span class="q">QUANTUM</span> <span class="a">APPS</span></h1>
+    <p class="tagline">
+      Free, open-source Android apps. Each one puts a handful of sites you already use
+      behind a single front door, and blocks the ads, popups and redirects on the way.
+    </p>
+
+    <div class="ai">
+      <b>WRITTEN BY AI</b>
+      <p>
+        Every app here was written by AI — Claude Code — including this page. The complete
+        source for each one is public on GitHub. Read it before you install an APK, from me
+        or from anyone. Nothing here collects analytics, telemetry or accounts.
+      </p>
+    </div>
+  </header>
+
+  <section id="apps">
+    <h2>THE APPS</h2>
+    <p class="sub">Android 7.0 or newer. Installed by downloading the APK, not through the Play Store.</p>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <!-- ============ QUANTUM MTG ============ -->
+  <section class="app" id="mtg">
+    <div class="head">
+      <img class="px" src="assets/mtg/icon.png" alt="Quantum MTG icon">
+      <div>
+        <h2 style="margin:0">QUANTUM MTG</h2>
+        <span class="kind" style="color:var(--blue);font-size:11px;letter-spacing:2px">MAGIC: THE GATHERING</span>
+      </div>
+    </div>
+
+    <ul class="feat">
+      <li><b>Three sites, one app.</b> <span>Moxfield for deckbuilding, TCGplayer for buying cards, XMage Nexus for playing online. Switch from a drawer on the right edge. Browsing needs no account.</span></li>
+      <li><b>Blocks ads, popups and redirects.</b> <span>Three layers, the way real blockers work: a 370-domain blocklist matched against every request and its parent domains, URL pattern filters, and CSS element hiding. Popup windows never open.</span></li>
+      <li><b>The sites still work.</b> <span>Blanket ad rules break single-page apps, so full-screen overlays are only removed when the element itself looks like an ad. Moxfield's deck editor, card previews and the TCGplayer cart survive.</span></li>
+      <li><b>Card images load.</b> <span>Moxfield serves card art from Scryfall's CDN on a different domain to the site itself. That CDN is explicitly allowed through, so pictures are never blanked out.</span></li>
+      <li><b>Desktop-site toggle.</b> <span>Moxfield's deck editor and XMage Nexus are laid out for wide screens. One tap swaps the user agent and reloads.</span></li>
+      <li><b>Screen filters and text zoom.</b> <span>Eye comfort in two strengths, stay-awake blue, extra dark, sepia, grayscale, and text size controls.</span></li>
+      <li><b>Sign-in works.</b> <span>OAuth popups would be swallowed by the popup blocker, so they are turned into ordinary top-level redirects.</span></li>
+    </ul>
+
+    <div class="strip">
+      <figure><img class="px" src="assets/mtg/island_bg.png" alt="Moxfield theme"><figcaption>MOXFIELD</figcaption></figure>
+      <figure><img class="px" src="assets/mtg/plains_bg.png" alt="TCGplayer theme"><figcaption>TCGPLAYER</figcaption></figure>
+      <figure><img class="px" src="assets/mtg/mountain_bg.png" alt="XMage Nexus theme"><figcaption>XMAGE NEXUS</figcaption></figure>
+    </div>
+
+    <p class="note">
+      <b>Two limits worth knowing.</b> Google blocks its sign-in flow inside every Android
+      WebView, so use email or Discord on Moxfield. And XMage Nexus is the community and
+      download site — the games themselves run in the separate XMage desktop client.
+    </p>
+  </section>
+
+  <!-- ============ QUANTUMMANGA ============ -->
+  <section class="app gold" id="manga">
+    <div class="head">
+      <img class="px" src="assets/manga/icon.png" alt="QuantumManga icon">
+      <div>
+        <h2 style="margin:0">QUANTUMMANGA</h2>
+        <span class="kind" style="color:var(--gold);font-size:11px;letter-spacing:2px">MANGA, LIGHT NOVELS, FANFIC</span>
+      </div>
+    </div>
+
+    <ul class="feat">
+      <li><b>Seven sites, one app.</b> <span>MangaFire and MangaDex for manga, NovelUpdates and Novelous for light novels, RoyalRoad and HoneyFeed for web novels, Archive of Our Own for fanfic.</span></li>
+      <li><b>Blocks ads, popups and redirects.</b> <span>The same three-layer blocking, which on manga sites is most of the point: no popunders, no tab hijacks, no redirect chains between chapters.</span></li>
+      <li><b>Image CDNs stay allowed.</b> <span>Manga pages are served from rotating CDN domains, which the blocker lets through, so pages are not left half-loaded.</span></li>
+      <li><b>Reading filters and text zoom.</b> <span>Eye comfort in two strengths, sepia, extra dark, grayscale, stay-awake blue, and text size controls for novel sites.</span></li>
+      <li><b>Links out still work.</b> <span>NovelUpdates sends you to translator sites by design, so outbound reading links are not intercepted.</span></li>
+    </ul>
+
+    <div class="strip">
+      <figure><img class="px" src="assets/manga/fire_bg.png" alt="MangaFire theme"><figcaption>MANGAFIRE</figcaption></figure>
+      <figure><img class="px" src="assets/manga/ocean_bg.png" alt="MangaDex theme"><figcaption>MANGADEX</figcaption></figure>
+      <figure><img class="px" src="assets/manga/grimoire_bg.png" alt="NovelUpdates theme"><figcaption>NOVELUPDATES</figcaption></figure>
+      <figure><img class="px" src="assets/manga/enchant_bg.png" alt="Novelous theme"><figcaption>NOVELOUS</figcaption></figure>
+      <figure><img class="px" src="assets/manga/crown_bg.png" alt="RoyalRoad theme"><figcaption>ROYALROAD</figcaption></figure>
+      <figure><img class="px" src="assets/manga/meadow_bg.png" alt="HoneyFeed theme"><figcaption>HONEYFEED</figcaption></figure>
+      <figure><img class="px" src="assets/manga/cyber_bg.png" alt="Archive of Our Own theme"><figcaption>AO3</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ INSTALL ============ -->
+  <section id="install" style="border-top:2px solid var(--line)">
+    <h2>INSTALLING</h2>
+    <p class="sub">Same three steps for every app here.</p>
+    <ol class="steps">
+      <li>Tap <b>DOWNLOAD APK</b>. The file lands in your downloads folder.</li>
+      <li>Open it. Android asks whether to allow installs from your browser — allow it. You only do this once.</li>
+      <li>Tap <b>Install</b>, then open the app.</li>
+    </ol>
+    <p class="note">
+      Android may warn that the app is from an unknown developer. That warning appears for
+      everything installed outside the Play Store, including this. The source is public if you
+      want to check what you are installing, or build it yourself instead.
+    </p>
+  </section>
+
+  <footer>
+    <div>Written by AI (Claude Code). Source public, nothing collected.</div>
+    <div class="links">
+      <a href="https://github.com/TapsAtlantia/QuantumMTG">Quantum MTG source</a>
+      <a href="https://github.com/TapsAtlantia/QuantumManga">QuantumManga source</a>
+      <a href="https://github.com/TapsAtlantia">GitHub</a>
+    </div>
+    <div>More apps as they get made.</div>
+  </footer>
+
+</div>
+
+<script>
+// ---- every app on the site, in one place. Add an object, get a card. ----
+var USER = "TapsAtlantia";
+var APPS = [
+  {
+    id: "mtg",
+    name: "Quantum MTG",
+    kind: "MAGIC: THE GATHERING",
+    repo: "QuantumMTG",
+    apk: "QuantumMTG.apk",
+    icon: "assets/mtg/icon.png",
+    blurb: "Moxfield, TCGplayer and XMage Nexus in one app, with ad and popup blocking."
+  },
+  {
+    id: "manga",
+    name: "QuantumManga",
+    kind: "MANGA, LIGHT NOVELS, FANFIC",
+    repo: "QuantumManga",
+    apk: "QuantumManga.apk",
+    icon: "assets/manga/icon.png",
+    blurb: "Seven manga, light-novel and fanfic sites in one app, with ad and popup blocking."
+  }
+];
+
+(function () {
+  var host = document.getElementById("cards");
+  APPS.forEach(function (app) {
+    var base = "https://github.com/" + USER + "/" + app.repo;
+    var card = document.createElement("div");
+    card.className = "card reveal";
+    card.innerHTML =
+      '<div class="top">' +
+        '<img class="icon px" src="' + app.icon + '" alt="' + app.name + ' icon">' +
+        '<div><div class="kind">' + app.kind + '</div><h3>' + app.name + '</h3></div>' +
+      '</div>' +
+      '<p class="blurb">' + app.blurb + '</p>' +
+      '<div class="meta" id="meta-' + app.id + '">loading latest release…</div>' +
+      '<div class="row2">' +
+        '<a class="btn" href="' + base + '/releases/latest/download/' + app.apk + '">DOWNLOAD APK</a>' +
+        '<a class="btn ghost" href="#' + app.id + '">Details</a>' +
+      '</div>' +
+      '<a class="btn ghost" href="' + base + '">Source code</a>';
+    host.appendChild(card);
+
+    // Live release info, so the version and size are never stale.
+    fetch("https://api.github.com/repos/" + USER + "/" + app.repo + "/releases/latest")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rel) {
+        var el = document.getElementById("meta-" + app.id);
+        if (!rel) { el.textContent = "Android 7.0+ · free"; return; }
+        var asset = (rel.assets || []).filter(function (a) { return /\.apk$/i.test(a.name); })[0];
+        var mb = asset ? (asset.size / 1048576).toFixed(1) + " MB · " : "";
+        el.textContent = (rel.tag_name || "") + " · " + mb + "Android 7.0+ · free";
+      })
+      .catch(function () {
+        document.getElementById("meta-" + app.id).textContent = "Android 7.0+ · free";
+      });
+  });
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal, section").forEach(function (el) {
+    el.classList.add("reveal");
+    io.observe(el);
+  });
+
+  // starfield drift
+  var far = document.querySelector("#sky .far");
+  var near = document.querySelector("#sky .near");
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY || 0;
+      far.style.transform = "translateY(" + (-y * 0.04) + "px)";
+      near.style.transform = "translateY(" + (-y * 0.10) + "px)";
+      ticking = false;
+    });
+  }
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+})();
+</script>
+</body>
+</html>
